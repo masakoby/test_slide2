@@ -1,20 +1,22 @@
 cmake_minimum_required(VERSION 3.5)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../bin)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake-modules)
+set(CMAKE_CXX_STANDARD 17)  
 
 
-project(test_slide1)
+project(test_slide2)
 
-find_package(OpenCV REQUIRED )
 
-file(GLOB sources "./*.cpp")
+file(GLOB source1 "./src/*.cpp")
+set(source2 
+../ds/kb_openslide.cpp ../ds/kb_slide_info.cpp 
+)
+add_executable(test_slide2 ${source1} ${source2})
 
-add_executable(test_slide1 ${sources})
+include_directories("${CMAKE_CURRENT_LIST_DIR}/../common")
+include_directories("${CMAKE_CURRENT_LIST_DIR}/../cv")
+include_directories("${CMAKE_CURRENT_LIST_DIR}/../ds")
 
-target_include_directories(test_slide1 PRIVATE ${OpenCV_INCLUDE_DIRS})
-target_include_directories(test_slide1 PRIVATE "/usr/local/include/openslide")
 
-target_link_libraries(test_slide1 ${OpenCV_LIBS})
-target_link_libraries(test_slide1 "/usr/local/lib/libopenslide.so")
+target_link_libraries(test_slide2 "${CMAKE_CURRENT_LIST_DIR}/../ds/libopenslide.lib")
 
