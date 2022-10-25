@@ -10,7 +10,7 @@ project(test_slide2)
 file(GLOB source1 "./src/*.cpp")
 set(source2 
 ../ds/kb_openslide.cpp ../ds/kb_slide_info.cpp 
-../xml/kb_xml.cpp ../xml/kb_xml_io.cpp 
+../xml/kb_xml.cpp ../xml/kb_xml_io.cpp ../xml/kb_xml_ndpa.cpp 
 )
 add_executable(test_slide2 ${source1} ${source2})
 
