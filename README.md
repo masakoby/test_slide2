@@ -5,7 +5,7 @@
 アノテーションした細胞とAI検出結果は、ndpa形式で保存されている。  
 
 
-- Windows settings: 
+- Windows settings:   
 .\vcpkg.exe install opencv:x64-windows  
 .\vcpkg.exe install xerces-c:x64-windows  
 
