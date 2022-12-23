@@ -11,11 +11,12 @@
 
 int main(int argc, char* argv[])
 {
-	std::string dirname_input = argv[1];
-	std::string dirname_output = argv[2];
-	int level = atoi(argv[3]);
+	std::string dirname_input_ndpi = argv[1];
+	std::string dirname_input_ndpa = argv[2];
+	std::string dirname_output = argv[3];
+	int level = atoi(argv[4]);
 
-	std::cout << dirname_input << std::endl;
+	std::cout << dirname_input_ndpi << std::endl;
 	std::cout << dirname_output << std::endl;
 	std::cout << level << std::endl;
 
@@ -30,7 +31,7 @@ int main(int argc, char* argv[])
 		vcase["ASCUS/ASC-H"] = 6;
 
 
-		std::string path_case = dirname_input + "case_information.txt";
+		std::string path_case = dirname_input_ndpi + "case_information.txt";
 		kb::load_csv(path_case, vv, ',');
 
 		//int num_vv = vv.size();
@@ -45,7 +46,7 @@ int main(int argc, char* argv[])
 	}
 
 	std::vector<std::string>  vfnames;
-	if (kb::search_files(dirname_input, "*.ndpa", vfnames) < 0)
+	if (kb::search_files(dirname_input_ndpa, "*.ndpa", vfnames) < 0)
 		return -1;
 
 	std::string path_output_txt = dirname_output + "all_cells.csv";
@@ -69,13 +70,13 @@ int main(int argc, char* argv[])
 	v_ok1.resize(num_files, 0);
 	v_ok2.resize(num_files, 0);
 	for (int kk = 0; kk < num_files; kk++) {
-		std::string path_ndpa = dirname_input + vfnames[kk];
+		std::string path_ndpa = dirname_input_ndpa + vfnames[kk];
 		std::cout << "---- " << kk << " / " << num_files << " ----" << std::endl;
 		std::cout << path_ndpa << std::endl;
 
 		int len_fname = vfnames[kk].length();
 		std::string fname_ndpi = vfnames[kk].substr(0, len_fname - 5);
-		std::string path_input = dirname_input + fname_ndpi;
+		std::string path_input = dirname_input_ndpi + fname_ndpi;
 		std::string path_output = dirname_output + fname_ndpi + ".jpg";
 
 		std::string case1;
@@ -130,13 +131,15 @@ int main(int argc, char* argv[])
 			if (v_ndpa[k].m_title == "show area")
 				continue;
 
-			std::cout << k << ": " <<
-				v_ndpa[k].m_annotation_type << " " <<
-				num << " " <<
-				v_ndpa[k].m_annotation_radius << " ";//
 
 			//	doctor's annotation
 			if (v_ndpa[k].m_annotation_type == "circle") {
+				std::cout << k << ": " <<
+					v_ndpa[k].m_annotation_type << " " <<
+					num << " " <<
+					v_ndpa[k].m_annotation_radius << " ";//
+
+
 				if (num == 2) {
 					cv::Point2d p1(v_ndpa[k].m_pointlist_d[0], v_ndpa[k].m_pointlist_d[1]);
 					vp_doctor.push_back(p1);
@@ -155,6 +158,7 @@ int main(int argc, char* argv[])
 
 					std::cout << "x,y="<<p1.x << " " << p1.y << " ";
 				}
+				std::cout << std::endl;
 			}
 			else {
 				if (num == 8) {
@@ -182,7 +186,7 @@ int main(int argc, char* argv[])
 					}
 
 
-					std::cout << "x,y=" << p2.x << " " << p2.y << " ";
+					//std::cout << "x,y=" << p2.x << " " << p2.y << " ";
 
 					if (rr <= 0) {
 						double r = v_ndpa[k].m_pointlist_d[0] - v_ndpa[k].m_pointlist_d[2];
@@ -194,8 +198,8 @@ int main(int argc, char* argv[])
 					}
 				}
 			}
-			std::cout << "rr="<<rr << " ";
-			std::cout << std::endl;
+			//std::cout << "rr="<<rr << " ";
+			//std::cout << std::endl;
 		}
 
 
