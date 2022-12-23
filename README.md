@@ -46,17 +46,17 @@ case_information.txt
 ndpiファイル名と診断名（NILM, LSIL, HSIL等）の対応付けファイルをCSV形式で作り、ndpiフォルダに置いておく。　　
 
 - output data  
-outputフォルダ内に、all_cells.csvとndpi_summary.csvが出力される。　　
+outputフォルダ内に、all_cells.csvとndpi_summary.csvが出力される。  
 all_cells.csv  
-G列：doctor_diagは、病理医がアノテーションした細胞の種類　　
-0=SILは確定だが、LSILかHSILか迷う細胞　　
-1=LSILを疑う細胞　　
-2=HSILを疑う細胞　　
+G列：doctor_diagは、病理医がアノテーションした細胞の種類  
+0=SILは確定だが、LSILかHSILか迷う細胞  
+1=LSILを疑う細胞  
+2=HSILを疑う細胞  　
 
 
-ndpi_summary.csv　　
-C列：　病理医がアノテーションした細胞数　　
-D列：　細胞抽出結果で抽出できた細胞数　　
-E列：　細胞分類結果で抽出できた細胞数　　
+ndpi_summary.csv  
+C列：　病理医がアノテーションした細胞数  
+D列：　細胞抽出結果で抽出できた細胞数  
+E列：　細胞分類結果で抽出できた細胞数  　
 
 
